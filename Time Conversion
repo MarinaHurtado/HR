@@ -1,0 +1,44 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    
+    static String conversion(String time){
+        String conv="";
+        StringBuilder cad = new StringBuilder();
+        char[] newTime = time.toCharArray();
+        char aux= time.charAt(time.length() - 2);
+        Integer firstTwo = Integer.parseInt(time.substring(0,2));
+        
+        if (firstTwo == 12){
+            if (aux == 'A'){
+                newTime[0]='0';
+                newTime[1]='0';
+            }
+        }
+        
+        else{
+            if (aux=='P'){
+                String newHour = (firstTwo+=12).toString();
+                newTime[0]=newHour.charAt(0);
+                newTime[1]=newHour.charAt(1);
+            }
+        }
+        
+        for (int i=0; i<8; i++ ){
+            cad.append(newTime[i]);
+        }
+            
+        return cad.toString();
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String time = in.next();
+        String newTime = conversion(time);
+        System.out.println(newTime);
+    }
+}
