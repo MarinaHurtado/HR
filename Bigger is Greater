@@ -1,0 +1,61 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+     public static boolean bigger(char ch1, char ch2){
+        return ch1>ch2;
+    }
+    
+    public static String sort(String st){
+        StringBuilder cad = new StringBuilder();
+        int pointer= 0;
+        boolean flag = true;
+        boolean flag2 = true;
+        int j=0;
+        int min;
+        while(flag){
+            j=pointer+1;
+            while (j<st.length() && flag2){
+                if(!bigger(st.charAt(pointer),st.charAt(j))){
+                    flag2=false;
+                }
+                else
+                    j++;
+            }
+            if (!flag2){ //Esa posicion tiene que ser la que cambie
+                min=j;
+                int aux=j+1;
+                while (aux<st.length()){
+                    if (bigger(st.charAt(min),st.charAt(aux)))
+                        min=aux;
+                    aux++;
+                }
+                flag=false;
+                cad.append(st.charAt(min));
+                pointer++;
+            }
+            else{
+                cad.append(st.charAt(pointer));
+                pointer++;
+            }
+        }
+        
+        // Step 2
+        
+        return cad.toString();
+    }
+    
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        for(int i=0; i<n; i++){
+            String cad = in.nextLine();
+            System.out.println(sort(cad));
+        }
+    }
+    
+}
