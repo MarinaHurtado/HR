@@ -1,0 +1,64 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    
+static String[] Braces(String[] values) {
+       int i=0;
+       int j=0;
+       String res[] = new String[values.length];
+       Stack pila= new Stack();
+       
+       for(int k=0; k<values.length; k++){ 
+        
+        String striing = values[k];
+        j=0;
+        
+        boolean ban=true;
+           
+       while(!pila.empty())
+            pila.pop();
+        
+        while (j<striing.length() && striing.charAt(j)!='\"' && ban){ 
+           
+               char chaar = striing.charAt(j);
+               if(chaar== '{' || chaar== '[' || chaar == '('){
+                   pila.push(chaar);
+               }
+               else {
+                   if(!pila.empty() && (chaar== '}' || chaar== ']' || chaar == ')')){
+                   char pop = (char)pila.pop();
+                   if (!(chaar == '}' && pop=='{') && !(chaar == ']' && pop=='[') && !(chaar == ')' && pop=='(') ){
+                       ban = false;
+                   }
+                    }
+                    else
+                        ban=false;
+               }
+            
+           j++;
+       }
+           
+           if (ban && pila.empty()){
+               res[k]="YES";
+           }
+           else{
+               res[k]="NO";
+           }
+        
+      }
+       return res;
+    }
+
+    public static void main(String[] args) {
+        //Scanner in = new Scanner(System.in);
+        String cad[] = {"{}", "[(", "{[{()]"}; 
+        String res[]=Braces(cad);
+        for(int i=0; i<res.length; i++){
+            System.out.println(res[i]);
+        }
+    }
+}
