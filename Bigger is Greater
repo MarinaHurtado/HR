@@ -12,6 +12,7 @@ public class Solution {
     
     public static String sort(String st){
         StringBuilder cad = new StringBuilder();
+        
         int pointer= 0;
         boolean flag = true;
         boolean flag2 = true;
@@ -30,21 +31,29 @@ public class Solution {
                 min=j;
                 int aux=j+1;
                 while (aux<st.length()){
-                    if (bigger(st.charAt(min),st.charAt(aux)))
+                    if (!bigger(st.charAt(min),st.charAt(aux)))
                         min=aux;
                     aux++;
                 }
                 flag=false;
                 cad.append(st.charAt(min));
-                pointer++;
             }
             else{
                 cad.append(st.charAt(pointer));
-                pointer++;
             }
+            pointer++;
         }
         
-        // Step 2
+        //Step 2
+        char arr[st.length()-pointer];
+        j=0;
+        while(pointer<st.length()){
+            arr[j]=charAt[pointer];
+            pointer++;
+            j++;
+        }
+        
+        //Still missing
         
         return cad.toString();
     }
