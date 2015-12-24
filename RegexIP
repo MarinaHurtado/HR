@@ -1,0 +1,23 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class regexIP {
+    
+    public static void main(String[] args) {
+        //IP Regex
+        String pattern = "((([0-1]?\\d)?\\d)|(2[0-4]\\d)|(25[0-5]))\\.((([0-1]?\\d)?\\d)|(2[0-4]\\d)|(25[0-5]))\\.((([0-1]?\\d)?\\d)|(2[0-4]\\d)|(25[0-5]))\\.((([0-1]?\\d)?\\d)|(2[0-4]\\d)|(25[0-5]))";
+        
+        Scanner in = new Scanner(System.in);
+        
+        //String to compare
+        String str= in.next();
+        
+        if(str.matches(pattern))
+            System.out.println("True");
+        else
+            System.out.println("False");
+    }
+}
