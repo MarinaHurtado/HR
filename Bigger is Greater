@@ -63,7 +63,11 @@ public class Solution {
         int n = in.nextInt();
         for(int i=0; i<n; i++){
             String cad = in.nextLine();
-            System.out.println(sort(cad));
+            String res = sort(cad);
+            if(cad!=res)
+                System.out.println(res);
+            else
+                System.out.println("no answer");
         }
     }
     
