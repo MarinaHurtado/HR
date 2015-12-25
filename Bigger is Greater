@@ -10,7 +10,7 @@ public class Solution {
         return ch1>ch2;
     }
     
-    public static String sort(String st){
+    public static String sort(String st)public static String sort(String st){
         StringBuilder cad = new StringBuilder();
         
         int pointer= 0;
@@ -45,10 +45,10 @@ public class Solution {
         }
         
         //Step 2
-        char arr[st.length()-pointer];
+        char arr[] = new char[st.length()-pointer];
         j=0;
         while(pointer<st.length()){
-            arr[j]=charAt[pointer];
+            arr[j]= st.charAt(pointer);
             pointer++;
             j++;
         }
