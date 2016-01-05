@@ -1,0 +1,33 @@
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    
+    public static void loops(int a, int b, int N){
+        StringBuilder cad = new StringBuilder();
+        double ans = a;
+        for (int i=0; i<N; i++){
+            ans += (Math.pow(2,i)*b);
+            cad.append((int)ans);
+            cad.append(" ");
+        }
+        System.out.println(cad.toString());
+    }
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        int T, a, b, N; 
+        Scanner in = new Scanner(System.in);
+        T = in.nextInt();
+        for (int i=0 ; i<T; i++){
+            a = in.nextInt();
+            b = in.nextInt();
+            N = in.nextInt();
+            loops(a,b,N);
+        }
+    }
+}
