@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+
+class Node{
+	int data;
+	Node next;
+	
+	Node(int d){
+        data=d;
+        next=null;
+    }
+    
+}
+
+class Solution{
+
+  public static  Node insertInTail(Node head,int data)
+  {
+    if (head== null){
+        head = new Node(data);
+    } 
+    else {
+        Node nodee = new Node(data);
+        Node aux=head;
+        while(aux.next!=null)
+            aux=aux.next;
+        aux.next=nodee;
+    }
+    return head;
+  }
+	
+}
