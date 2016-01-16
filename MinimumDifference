@@ -1,0 +1,104 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Data {
+    
+    public int d;
+    public boolean flag;
+
+    public Data() {
+        this.d = 0;
+        this.flag = false;
+    }
+    
+    public Data(int d) {
+        this.d = d;
+        this.flag = true;
+    }
+    
+}
+
+class Pair{
+    int a;
+    int b;
+    boolean flag;
+    
+    public Pair(){
+        this.a = 0;
+        this.b = 0;
+        flag=false;
+    }
+
+    public Pair(int a, int b) {
+        this.a = a;
+        this.b = b;
+        flag=true;
+    }
+    
+}
+
+public class Solution {
+
+public static void swift(Data[] arr, int j){
+        for(int i=arr.length-2; i>=j; i--){
+            arr[i+1]=arr[i];
+        }
+    }
+    
+    public static void insert(Data[] arr, int d){
+        int i=0;
+        while(i<arr.length && arr[i].flag && arr[i].d<d){
+            i++;
+        }
+        swift(arr,i);
+        arr[i]= new Data(d);
+    }
+    
+    public static Pair[] minDiff(Data[] arr){
+        Pair[] pairs =new Pair[arr.length];
+        for(int j=0; j< pairs.length; j++)
+                    pairs[j]=new Pair();
+        int dif=Math.abs(arr[0].d-arr[1].d);
+        pairs[0]=new Pair(arr[0].d,arr[1].d);
+        int pair=1;
+        
+        for(int i=1; i<arr.length-2; i++){
+            if(Math.abs(arr[i].d-arr[i+1].d)<dif){
+                pairs =new Pair[arr.length];
+                for(int j=0; j< pairs.length; j++)
+                    pairs[j]=new Pair();
+                dif=Math.abs(arr[i].d-arr[i+1].d);
+                pairs[0]=new Pair(arr[i].d,arr[i+1].d);
+                pair=1;
+            }
+            else if(Math.abs(arr[i].d-arr[i+1].d)==dif){
+                pairs[pair]=new Pair(arr[i].d,arr[i+1].d);
+                pair++;
+            }
+        }
+        return pairs;
+    }
+    
+    public static void main(String[] args) {
+       Scanner in = new Scanner(System.in);
+       int T = in.nextInt();
+       Data[] arr = new Data[T];
+       for(int i=0; i<T ;i++){
+            arr[i]=new Data();
+       }
+       for(int i=0; i<T ;i++){
+            insert(arr,in.nextInt());
+       }
+       
+       Pair[] pairs = minDiff(arr);
+       int i=0;
+       while (i<pairs.length && pairs[i].flag){
+            System.out.print(pairs[i].a + " " + pairs[i].b + " ");
+            i++;
+       }
+    }
+    
+}
