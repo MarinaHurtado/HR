@@ -4,23 +4,6 @@ import java.text.*;
 import java.math.*;
 import java.util.regex.*;
 
-class Data {
-    
-    int d;
-    Data next;
-
-    public Data(int d) {
-        this.d = d;
-        this.next = null;
-    }
-    
-    public Data(int d, Data n) {
-        this.d = d;
-        this.next = n;
-    }
-    
-}
-
 class Pair{
     int a;
     int b;
@@ -34,49 +17,100 @@ class Pair{
     
 }
 
+class MergeSort{
+    //http://www.java2novice.com/java-sorting-algorithms/merge-sort/#sthash.tFdK4OD9.dpuf
+    public int[] array;
+    private int[] tempMergArr;
+    private int length;
+
+    public MergeSort(int[] array) {
+        this.array = array;
+        this.length = array.length;
+        this.tempMergArr = new int[length];
+    }
+     
+    public void sort() {
+        doMergeSort(0, length - 1);
+    }
+ 
+    private void doMergeSort(int lowerIndex, int higherIndex) {
+         
+        if (lowerIndex < higherIndex) {
+            int middle = lowerIndex + (higherIndex - lowerIndex) / 2;
+            // Below step sorts the left side of the array
+            doMergeSort(lowerIndex, middle);
+            // Below step sorts the right side of the array
+            doMergeSort(middle + 1, higherIndex);
+            // Now merge both sides
+            mergeParts(lowerIndex, middle, higherIndex);
+        }
+    }
+ 
+    private void mergeParts(int lowerIndex, int middle, int higherIndex) {
+ 
+        for (int i = lowerIndex; i <= higherIndex; i++) {
+            tempMergArr[i] = array[i];
+        }
+        int i = lowerIndex;
+        int j = middle + 1;
+        int k = lowerIndex;
+        while (i <= middle && j <= higherIndex) {
+            if (tempMergArr[i] <= tempMergArr[j]) {
+                array[k] = tempMergArr[i];
+                i++;
+            } else {
+                array[k] = tempMergArr[j];
+                j++;
+            }
+            k++;
+        }
+        while (i <= middle) {
+            array[k] = tempMergArr[i];
+            k++;
+            i++;
+        }
+ 
+    }
+}
+
+
+
 public class Solution {
 
-    public static void insertData(Data dataHead, int d){
-        while(dataHead.next!=null && dataHead.d<d){
-            dataHead = dataHead.next;
-        }
-        Data aux = new Data(d,dataHead.next);
-        dataHead.next=aux;
-    }
-    
-    public static Pair minDiff(Data data){
-        int dif=Math.abs(data.d - data.next.d);
-        Pair pairHead=new Pair(data.d, data.next.d, null);
-        while(data.next!=null){
-            if(Math.abs(data.d - data.next.d)<dif){
-                dif=Math.abs(data.d - data.next.d);
-                pairHead=new Pair(data.d, data.next.d, null);
+    public static Pair finMinPair(int[] arr){
+        int dif = Math.abs(arr[0]-arr[1]);
+        Pair pairList = new Pair(arr[0],arr[1],null);
+        for (int i=1; i<arr.length-2; i++){
+            int newDif= Math.abs(arr[i]-arr[i+1]);
+            if(newDif<dif){
+                dif=newDif;
+                pairList= new Pair(arr[i], arr[i+1], null);
             }
-            else if(Math.abs(data.d - data.next.d)==dif){
-               Pair newPair = new Pair(data.d, data.next.d, null);
-               Pair aux= pairHead;
-               while(aux.next!=null)
-                   aux=aux.next;
-               aux.next=newPair;
+            else if(newDif==dif){
+                Pair aux= pairList;
+                while(aux.next!=null)
+                    aux=aux.next;
+                aux.next = new Pair(arr[i], arr[i+1], null);
             }
         }
-        return pairHead;
+        return pairList;
     }
     
     public static void main(String[] args) {
        Scanner in = new Scanner(System.in);
        int T = in.nextInt();
-       Data dataHead = new Data(in.nextInt());
-       for(int i=1; i<T ;i++){
-            insertData(dataHead, in.nextInt());
-       }
+       int[] arr=new int[T];
+       for (int i=0; i<T; i++)
+           arr[i]=in.nextInt();
+       MergeSort meSo = new MergeSort(arr);
+       meSo.sort();
        
-       Pair pairs = minDiff(dataHead);
-       System.out.println(pairs.a + " " + pairs.b + " ");
-        while (pairs.next != null){
-            pairs = pairs.next;
-            System.out.println(pairs.a + " " + pairs.b + " ");
-        }
+       Pair pairList = finMinPair(meSo.array);
+       System.out.print(pairList.a + " " + pairList.b + " ");
+       while(pairList.next!=null){
+           pairList = pairList.next;
+           System.out.print(pairList.a + " " + pairList.b + " ");
+       }
     }
     
 }
