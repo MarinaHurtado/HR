@@ -1,0 +1,27 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int d,de,m,me,y,ye;
+        d = sc.nextInt();
+        m = sc.nextInt();
+        y = sc.nextInt();
+        de = sc.nextInt();
+        me = sc.nextInt();
+        ye = sc.nextInt();
+        if(ye < y)
+            System.out.println(10000);
+        else if(me < m)
+            System.out.println(500*(m-me));
+        else if(de < d)
+            System.out.println(15*(d-de));
+        else
+            System.out.println(0);
+    }
+}
