@@ -1,0 +1,37 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    
+    public static void isFunny(String s){
+        boolean aux = true;
+        StringBuilder input1 = new StringBuilder();
+        input1.append(s);
+        input1=input1.reverse(); 
+        String r=input1.toString();
+        for(int i=1; i<s.length() ; i++){
+            char si = s.charAt(i);
+            char si1 = s.charAt(i-1);
+            char ri1 = r.charAt(i-1);
+            char ri = r.charAt(i);
+            if(Math.abs(si-si1)!=Math.abs(ri-ri1))
+                aux=false;
+        }
+        if(aux)
+            System.out.println("Funny");
+        else
+            System.out.println("Not Funny");
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        for (int i=0; i<T; i++){
+            String s = sc.next();
+            isFunny(s);
+        }  
+    }
+}
