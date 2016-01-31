@@ -1,2 +1,2 @@
 # HR
-Problems Solutions
+Problem Solutions
